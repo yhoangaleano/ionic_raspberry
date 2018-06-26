@@ -43,13 +43,34 @@ export class ApiProvider {
     var bdBombillosString = JSON.stringify(this.bdBombillos);
     localStorage.setItem('bdBombillos', bdBombillosString);
 
-    let peticion = habitacion.state ? 'on' : 'off';
+    let status = habitacion.state ? '100' : '0';
     let pine = habitacion.pine;
 
     let headers: HttpHeaders = new HttpHeaders().set('Accept', 'application/json').set('Content-Type', 'application/json;charset=UTF-8');
 
     return new Promise(resolve => {
-      this.http.get(`${this.ipAddress}led/${peticion}/${pine}`, {
+      this.http.get(`${this.ipAddress}brillo/${pine}/${status}`, {
+        headers: headers
+      }).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  establecerBrillo(indice: number, habitacion: IHabitacion) {
+    this.bdBombillos[indice] = habitacion;
+    var bdBombillosString = JSON.stringify(this.bdBombillos);
+    localStorage.setItem('bdBombillos', bdBombillosString);
+
+    let status = habitacion.brightness;
+    let pine = habitacion.pine;
+
+    let headers: HttpHeaders = new HttpHeaders().set('Accept', 'application/json').set('Content-Type', 'application/json;charset=UTF-8');
+
+    return new Promise(resolve => {
+      this.http.get(`${this.ipAddress}brillo/${pine}/${status}`, {
         headers: headers
       }).subscribe(data => {
         resolve(data);

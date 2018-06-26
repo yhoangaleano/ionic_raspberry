@@ -51,4 +51,12 @@ export class HabitacionesPage {
     this.bombillos = this.apiProvider.bdBombillos;
   }
 
+  establecerBrillo(i, bombillo){
+    console.log("cambiando el brillo");
+    this.apiProvider.establecerBrillo(i, bombillo).then((data : any) => {
+      console.log(data.mensaje);
+    });
+    this.bombillos = this.apiProvider.bdBombillos;
+  }
+
 }

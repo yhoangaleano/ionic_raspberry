@@ -19,26 +19,26 @@
 
 
 <ion-content padding>
-  <form #formBombillo="ngForm" (ngSubmit)="CrearBombillo(formBombillo)">
+  <form #crearHabitacion="ngForm" (ngSubmit)="CrearBombillo()">
     <ion-list>
 
     <ion-item>
       <ion-label floating>Nombre</ion-label>
-      <ion-input required type="text" name="name" ngModel></ion-input>
+      <ion-input required type="text" id="name" name="name" [(ngModel)]="bombillo.name"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Pin</ion-label>
-      <ion-input required pattern="^[0-9]+$" type="number" name="pine" ngModel></ion-input>
+      <ion-input required pattern="^[0-9]+$" type="number" id="pine" name="pine" [(ngModel)]="bombillo.pine"></ion-input>
     </ion-item  >
 
     <ion-item>
       <ion-label floating>Descripción</ion-label>
-      <ion-input required type="text" name="description" ngModel></ion-input>
+      <ion-input required type="text" id="description" name="description" [(ngModel)]="bombillo.description"></ion-input>
     </ion-item>
 
  </ion-list>
-    <button [disabled]="!formBombillo.valid" ion-button block>Crear</button>
+    <button [disabled]="!crearHabitacion.form.valid" ion-button block>Crear</button>
   </form>
 
 </ion-content>

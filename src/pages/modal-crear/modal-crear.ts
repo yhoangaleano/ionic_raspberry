@@ -16,11 +16,21 @@ import { IHabitacion } from '../../interfaces/IHabitacion';
   templateUrl: 'modal-crear.html',
 })
 export class ModalCrearPage {
-  public  bombillo: IHabitacion;
+
+  public bombillo = {
+
+    name: '',
+    pine: 0,
+    description: '',
+    state: false,
+    brightness: 0
+
+  };
+
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    private viewCtrl: ViewController, 
+    private viewCtrl: ViewController,
     private toastCtrl: ToastController,
     private apiProvider: ApiProvider) {
   }
@@ -33,16 +43,14 @@ export class ModalCrearPage {
     this.viewCtrl.dismiss();
   }
 
-  CrearBombillo(formBombillo){
-    this.bombillo.name = formBombillo.value.name;
-    this.bombillo.pine = formBombillo.value.pine;
-    this.bombillo.description = formBombillo.value.description;
+  CrearBombillo(){
+
+    console.log(this.bombillo);
     this.bombillo.state = false;//estado encendido o apagado
     this.bombillo.brightness = 0;//brillo del bombillo
 
     this.apiProvider.guardar(this.bombillo);
 
-    formBombillo.reset();
     this.viewCtrl.dismiss();
     let toast = this.toastCtrl.create({
       message: 'Iluminación creada satisfactoriamente',
